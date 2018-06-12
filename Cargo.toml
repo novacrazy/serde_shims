@@ -4,8 +4,14 @@ version = "0.1.0"
 authors = ["novacrazy <novacrazy@gmail.com>"]
 license = "MIT"
 description = "Community Driven Serde Shims"
-documentation = ""
+documentation = "https://novacrazy.github.io/serde_shims/"
+categories = ["encoding"]
 keywords = ["serde", "shim"]
+readme = "README.md"
+include = ["Cargo.toml", "src/**/*.rs", "README.md", "LICENSE"]
+
+[badges]
+travis-ci = { repository = "novacrazy/serde_shims" }
 
 [dependencies]
 serde = "1.0.66"
