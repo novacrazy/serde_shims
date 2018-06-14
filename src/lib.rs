@@ -18,11 +18,17 @@
 //!
 //! ```toml
 //! [dependencies]
-//! serde_shims = { version = "*", features = ["mime"] }
+//! serde_shims = { version = "*", features = ["std", "mime"] }
 //! ```
 //!
 
 extern crate serde;
 
+#[cfg(feature = "std")]
+pub mod std_shims;
+
 #[cfg(feature = "mime")]
 pub mod mime;
+
+#[cfg(feature = "chrono")]
+pub mod chrono;

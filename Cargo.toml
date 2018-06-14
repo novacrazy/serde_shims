@@ -10,12 +10,16 @@ keywords = ["serde", "shim"]
 readme = "README.md"
 include = ["Cargo.toml", "src/**/*.rs", "README.md", "LICENSE"]
 
+[features]
+std = []
+
 [badges]
 travis-ci = { repository = "novacrazy/serde_shims" }
 
 [dependencies]
 serde = "1.0.66"
 mime = { version = "0.3.7", optional = true }
+chrono = { version = "0.4.3", optional = true }
 
 [dev-dependencies]
 serde_json = "1.0.20"

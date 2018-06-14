@@ -3,7 +3,7 @@
 //! To enable the Mime shim, add it to the crate features list:
 //!
 //! ```toml
-//! serde_shims = { version = "*", features = ["mime"]}
+//! serde_shims = { version = "*", features = ["mime"] }
 //! ```
 //!
 //! Full example:

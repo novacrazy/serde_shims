@@ -21,7 +21,7 @@ with the desired crate shims as the crate features:
 
 ```toml
 [dependencies]
-serde_shims = { version = "*", features = ["mime"] }
+serde_shims = { version = "*", features = ["std", "mime"] }
 ```
 
 If there is a crate you'd like to have a Serde shim for,
