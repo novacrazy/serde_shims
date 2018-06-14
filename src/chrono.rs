@@ -54,19 +54,14 @@ use serde::ser::Serializer;
 
 use self::chrono::NaiveDateTime;
 
-pub fn serialize_naivedatetime_as_millis<S>(
-    time: &NaiveDateTime,
-    serializer: S,
-) -> Result<S::Ok, S::Error>
+pub fn serialize_naivedatetime_as_millis<S>(time: &NaiveDateTime, serializer: S) -> Result<S::Ok, S::Error>
 where
     S: Serializer,
 {
     serializer.serialize_u64(time.timestamp_millis().max(0) as u64)
 }
 
-pub fn deserialize_naivedatetime_from_millis<'de, D>(
-    deserializer: D,
-) -> Result<NaiveDateTime, D::Error>
+pub fn deserialize_naivedatetime_from_millis<'de, D>(deserializer: D) -> Result<NaiveDateTime, D::Error>
 where
     D: Deserializer<'de>,
 {
@@ -86,8 +81,7 @@ where
             let secs = millis / 1000;
             let nsecs = (millis % 1000) * 1000000;
 
-            NaiveDateTime::from_timestamp_opt(secs as i64, nsecs as u32)
-                .ok_or_else(|| E::custom("invalid or out-of-range datetime"))
+            NaiveDateTime::from_timestamp_opt(secs as i64, nsecs as u32).ok_or_else(|| E::custom("invalid or out-of-range datetime"))
         }
     }
 

@@ -39,10 +39,7 @@ pub mod option {
     ///     assert_eq!(serde_json::to_string(&none_test).unwrap(), r#"{"item_limit":0}"#);
     /// }
     /// ```
-    pub fn serialize_none_as_default<S, T>(
-        value: &Option<T>,
-        serializer: S,
-    ) -> Result<S::Ok, S::Error>
+    pub fn serialize_none_as_default<S, T>(value: &Option<T>, serializer: S) -> Result<S::Ok, S::Error>
     where
         S: Serializer,
         T: Serialize + Default,
