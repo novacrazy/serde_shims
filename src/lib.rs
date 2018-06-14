@@ -22,7 +22,23 @@
 //! ```
 //!
 
-extern crate serde;
+#[doc(hidden)]
+#[macro_use]
+pub extern crate serde;
+
+#[cfg(feature = "enum_primitive")]
+#[doc(hidden)]
+pub extern crate enum_primitive as enum_primitive_internal;
+
+#[cfg(feature = "enum_primitive")]
+pub mod enum_primitive;
+
+#[cfg(feature = "bitflags")]
+#[doc(hidden)]
+pub extern crate bitflags as bitflags_internal;
+
+#[cfg(feature = "bitflags")]
+pub mod bitflags;
 
 #[cfg(feature = "std")]
 pub mod std_shims;
