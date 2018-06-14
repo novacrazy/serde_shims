@@ -3,6 +3,8 @@ serde_shims [![Build Status](https://travis-ci.org/novacrazy/serde_shims.svg?bra
 
 ## Community Driven Serde Shims
 
+#### [Documentation](https://novacrazy.github.io/serde_shims/)
+
 Many crates prefer to avoid natively providing Serde integration on the basis
 it could be unstable in the future, be annoying to maintain, or stifles
 innovation if there is ever a Serde competitor in the Rust serialization world.

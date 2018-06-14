@@ -1,10 +1,11 @@
 [package]
 name = "serde_shims"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["novacrazy <novacrazy@gmail.com>"]
 license = "MIT"
 description = "Community Driven Serde Shims"
 documentation = "https://novacrazy.github.io/serde_shims/"
+repository = "https://github.com/novacrazy/serde_shims"
 categories = ["encoding"]
 keywords = ["serde", "shim"]
 readme = "README.md"
