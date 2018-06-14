@@ -23,7 +23,6 @@
 //!
 
 #[doc(hidden)]
-#[macro_use]
 pub extern crate serde;
 
 #[cfg(feature = "enum_primitive")]
