@@ -20,7 +20,8 @@
 //!
 //! bitflags! {
 //!     // Note that `impl_serde_for_bitflags` requires the flag type to
-//!     // implement `serde::Serialize` and be some kind of deserializable integer type.
+//!     // implement `Serialize` and `Deserialize`.
+//!     //
 //!     // All primitive integer types satisfy these requirements
 //!     pub struct Permission: u32 {
 //!         const SEND_MESSAGE = 0x00000001;
@@ -46,7 +47,7 @@
 /// Implements `Serialize` and `Deserialize` for a `bitflags!` generated structure.
 ///
 /// Note that `impl_serde_for_bitflags` requires the flag type to
-/// implement `serde::Serialize` and be some kind of deserializable integer type.
+/// implement `Serialize` and `Deserialize`.
 ///
 /// All primitive integer types satisfy these requirements.
 ///
@@ -68,38 +69,11 @@ macro_rules! impl_serde_for_bitflags {
             where
                 D: $crate::serde::Deserializer<'de>,
             {
-                struct Visitor;
+                let value = <_ as $crate::serde::Deserialize<'de>>::deserialize(deserializer)?;
 
-                impl<'de> $crate::serde::de::Visitor<'de> for Visitor {
-                    type Value = $name;
-
-                    fn expecting(&self, formatter: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
-                        write!(formatter, "a valid bitflag combination for {}", stringify!($name))
-                    }
-
-                    impl_serde_for_bitflags!(__VISIT $name::visit_i8:i8);
-                    impl_serde_for_bitflags!(__VISIT $name::visit_i16:i16);
-                    impl_serde_for_bitflags!(__VISIT $name::visit_i32:i32);
-                    impl_serde_for_bitflags!(__VISIT $name::visit_i64:i64);
-                    impl_serde_for_bitflags!(__VISIT $name::visit_u64:u64);
-
-                    #[cfg(integer128)]
-                    impl_serde_for_bitflags!(__VISIT $name::visit_i128:i128);
-
-                    #[cfg(integer128)]
-                    impl_serde_for_bitflags!(__VISIT $name::visit_u128:u128);
-                }
-
-                deserializer.deserialize_any(Visitor)
+                $name::from_bits(value)
+                    .ok_or_else(|| $crate::serde::de::Error::custom(format!("Invalid bits {:#X} for {}", value, stringify!($name))))
             }
         }
     };
-    (__VISIT $name:ident::$visit:ident: $t:ty) => {
-        fn $visit<E>(self, value: $t) -> ::std::result::Result<Self::Value, E>
-        where
-            E: $crate::serde::de::Error,
-        {
-            $name::from_bits(value as _).ok_or_else(|| E::custom(format!("Invalid bits {:#X} for {}", value, stringify!($name))))
-        }
-    }
 }
