@@ -1,10 +1,14 @@
 language: rust
+rust:
+  - stable
+  - beta
+  - nightly
 script:
-- cd $TRAVIS_BUILD_DIR
-- cargo build
-- cargo test
-- cargo build --all-features
-- cargo test --all-features
+  - cd $TRAVIS_BUILD_DIR
+  - cargo build
+  - cargo test
+  - cargo build --all-features
+  - cargo test --all-features
 after_success: |-
   [ $TRAVIS_BRANCH = master ] &&
   [ $TRAVIS_PULL_REQUEST = false ] &&
