@@ -1,6 +1,6 @@
 [package]
 name = "serde_shims"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["novacrazy <novacrazy@gmail.com>"]
 license = "MIT"
 description = "Community Driven Serde Shims"
@@ -27,3 +27,9 @@ mime = ["mime_serde_shim"]
 std = ["std_serde_shims"]
 enum_primitive = ["enum_primitive_serde_shim"]
 default = []
+
+[package.metadata.docs.rs]
+all-features = true
+
+[package.metadata.playground]
+all-features = true
