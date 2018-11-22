@@ -50,7 +50,7 @@ pub extern crate enum_primitive;
 
 /// Implements `Serialize` and `Deserialize` for an `enum_from_primitive!` generated enum.
 ///
-/// See the [`enum_primitive`](./enum_primitive/index.html) module for a full example.
+/// See the [`enum_primitive`](../enum_primitive_serde_shim/index.html) shim for a full example.
 #[macro_export]
 macro_rules! impl_serde_for_enum_primitive {
     ($name:ident) => {

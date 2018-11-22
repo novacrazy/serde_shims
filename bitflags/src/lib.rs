@@ -55,7 +55,7 @@ pub extern crate serde;
 ///
 /// All primitive integer types satisfy these requirements.
 ///
-/// See the [`bitflags`](./bitflags/index.html) module for a full example.
+/// See the [`bitflags`](../bitflags_serde_shim/index.html) shim for a full example.
 #[macro_export]
 macro_rules! impl_serde_for_bitflags {
     ($name:ident) => {
