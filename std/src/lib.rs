@@ -1,6 +1,6 @@
 //! Potentially useful shims for the standard library
 //!
-//! To enable `std` shims, add it to the crate features list:
+//! To enable `std` shims, add it as a dependency:
 //!
 //! ```toml
 //! [dependencies]

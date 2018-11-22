@@ -1,6 +1,6 @@
 //! Mime crate Serde shim
 //!
-//! To enable the Mime shim, add it to the crate features list:
+//! To enable the Mime shim, add it as a dependency:
 //!
 //! ```toml
 //! [dependencies]

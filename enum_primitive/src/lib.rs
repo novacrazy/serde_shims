@@ -1,6 +1,6 @@
 //! `enum_primitive` crate Serde shims
 //!
-//! To enable this shim, add it to the crate features list:
+//! To enable this shim, add it as a dependency:
 //!
 //! ```toml
 //! [dependencies]

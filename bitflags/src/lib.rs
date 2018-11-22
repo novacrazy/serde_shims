@@ -1,6 +1,6 @@
 //! `bitflags` crate Serde shims
 //!
-//! To enable to `bitflags` shims, add it to the crate features list:
+//! To enable to `bitflags` shims, add it as a dependency:
 //!
 //! ```toml
 //! [dependencies]
