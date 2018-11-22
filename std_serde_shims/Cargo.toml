@@ -1,6 +1,6 @@
 [package]
 name = "std_serde_shims"
-version = "0.1.2"
+version = "0.2.0"
 authors = ["novacrazy <novacrazy@gmail.com>"]
 license = "MIT"
 description = "Community Driven Serde Shims"
@@ -10,8 +10,8 @@ categories = ["encoding"]
 keywords = ["serde", "shim"]
 
 [dependencies]
-serde = "1.0.66"
+serde = "1.0"
 
 [dev-dependencies]
-serde_json = "1.0.20"
-serde_derive = "1.0.66"
+serde_json = "1.0"
+serde_derive = "1.0"

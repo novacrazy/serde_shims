@@ -1,6 +1,6 @@
 [package]
 name = "serde_shims"
-version = "0.1.2"
+version = "0.2.0"
 authors = ["novacrazy <novacrazy@gmail.com>"]
 license = "MIT"
 description = "Community Driven Serde Shims"
@@ -12,7 +12,14 @@ keywords = ["serde", "shim"]
 publish = false
 
 [dependencies]
-bitflags_serde_shim = { path = "../bitflags_serde_shim" }
-mime_serde_shim = { path = "../mime_serde_shim" }
-std_serde_shims = { path = "../std_serde_shims" }
-enum_primitive_serde_shim = { path = "../enum_primitive_serde_shim" }
+bitflags_serde_shim = { version = "0.2", optional = true, path = "../bitflags_serde_shim" }
+mime_serde_shim = { version = "0.2", optional = true, path = "../mime_serde_shim" }
+std_serde_shims = { version = "0.2", optional = true, path = "../std_serde_shims" }
+enum_primitive_serde_shim = { version = "0.2", optional = true, path = "../enum_primitive_serde_shim" }
+
+[features]
+bitflags = ["bitflags_serde_shim"]
+mime = ["mime_serde_shim"]
+std = ["std_serde_shims"]
+enum_primitive = ["enum_primitive_serde_shim"]
+default = []

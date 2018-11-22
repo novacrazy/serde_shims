@@ -4,7 +4,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! bitflags_serde_shim = "0.1"
+//! bitflags_serde_shim = "0.2"
 //! ```
 //!
 //! Full example:

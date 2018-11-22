@@ -4,7 +4,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! enum_primitive_serde_shim = "0.1"
+//! enum_primitive_serde_shim = "0.2"
 //! ```
 //!
 //! Full example:

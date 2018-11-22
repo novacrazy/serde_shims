@@ -15,15 +15,17 @@ add that functionality to those crates directly. The innability to share code be
 binaries or libraries is especially painful.
 
 So, as a compromise, I present this crate as a way to provide
-`serialize_with`/`deserialize_with` functions for crates without
+`serialize_with`/`deserialize_with` functions or implementation macros for crates without
 native Serde implementations.
 
-To enable these shims, simply add the crate to your `Cargo.toml`
-with the desired crate shims as the crate features:
+To enable these shims, simply add the crate to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-serde_shims = { version = "*", features = ["std", "mime"] }
+bitflags_serde_shim = "0.2"
+enum_primitive_serde_shim = "0.2"
+mime_serde_shim = "0.2"
+std_serde_shims = "0.2"
 ```
 
 If there is a crate you'd like to have a Serde shim for,

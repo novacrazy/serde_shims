@@ -1,6 +1,6 @@
 [package]
 name = "bitflags_serde_shim"
-version = "0.1.2"
+version = "0.2.0"
 authors = ["novacrazy <novacrazy@gmail.com>"]
 license = "MIT"
 description = "Community Driven Serde Shims"

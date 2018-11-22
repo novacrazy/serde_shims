@@ -4,7 +4,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! std_serde_shims = "0.1"
+//! std_serde_shims = "0.2"
 //! ```
 
 extern crate serde;

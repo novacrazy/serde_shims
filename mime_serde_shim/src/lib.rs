@@ -4,7 +4,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! mime_serde_shim = "0.1"
+//! mime_serde_shim = "0.2"
 //! ```
 //!
 //! Full example:
