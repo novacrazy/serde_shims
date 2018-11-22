@@ -1,4 +1,21 @@
 //! Meta package for all Serde shims, mostly for documentation but does re-export shims like version `0.1`.
+//!
+//! To use the crate individually:
+//!
+//! ```toml
+//! [dependencies]
+//! bitflags_serde_shim = "0.2"
+//! enum_primitive_serde_shim = "0.2"
+//! mime_serde_shim = "0.2"
+//! std_serde_shims = "0.2"
+//! ```
+//!
+//! or as a legacy feature-based import with this meta crate:
+//!
+//! ```toml
+//! [dependencies]
+//! serde_shims = { version = "0.2", features = ["std", "mime"] }
+//! ```
 
 /// `bitflags` crate Serde shims
 #[cfg(feature = "bitflags")]

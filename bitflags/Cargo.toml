@@ -1,6 +1,6 @@
 [package]
 name = "bitflags_serde_shim"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["novacrazy <novacrazy@gmail.com>"]
 license = "MIT"
 description = "Community Driven Serde Shims"
@@ -8,6 +8,10 @@ documentation = "https://novacrazy.github.io/serde_shims/"
 repository = "https://github.com/novacrazy/serde_shims"
 categories = ["encoding"]
 keywords = ["serde", "shim", "bitflags"]
+readme = "../README.md"
+
+[badges]
+travis-ci = { repository = "novacrazy/serde_shims" }
 
 [dependencies]
 serde = "1.0"

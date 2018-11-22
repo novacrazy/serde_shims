@@ -8,14 +8,18 @@ documentation = "https://novacrazy.github.io/serde_shims/"
 repository = "https://github.com/novacrazy/serde_shims"
 categories = ["encoding"]
 keywords = ["serde", "shim"]
+readme = "../README.md"
 
-publish = false
+# publish = false
+
+[badges]
+travis-ci = { repository = "novacrazy/serde_shims" }
 
 [dependencies]
-bitflags_serde_shim = { version = "0.2", optional = true, path = "../bitflags" }
-mime_serde_shim = { version = "0.2", optional = true, path = "../mime" }
-std_serde_shims = { version = "0.2", optional = true, path = "../std" }
-enum_primitive_serde_shim = { version = "0.2", optional = true, path = "../enum_primitive" }
+bitflags_serde_shim = { version = "0.2", optional = true } # , path = "../bitflags" }
+mime_serde_shim = { version = "0.2", optional = true } # , path = "../mime" }
+std_serde_shims = { version = "0.2", optional = true } # , path = "../std" }
+enum_primitive_serde_shim = { version = "0.2", optional = true } # , path = "../enum_primitive" }
 
 [features]
 bitflags = ["bitflags_serde_shim"]

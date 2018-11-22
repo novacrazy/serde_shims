@@ -28,5 +28,12 @@ mime_serde_shim = "0.2"
 std_serde_shims = "0.2"
 ```
 
+or as a legacy feature-based import with the meta crate:
+
+```toml
+[dependencies]
+serde_shims = { version = "0.2", features = ["std", "mime"] }
+```
+
 If there is a crate you'd like to have a Serde shim for,
 or would like to contribute your own, feel free to open an issue or pull request!
