@@ -3,7 +3,8 @@
 //! To enable this shim, add it to the crate features list:
 //!
 //! ```toml
-//! serde_shims = { version = "*", features = ["enum_primitive"] }
+//! [dependencies]
+//! enum_primitive_serde_shim = "0.1"
 //! ```
 //!
 //! Full example:
@@ -12,11 +13,11 @@
 //! #[macro_use]
 //! extern crate serde_derive;
 //! extern crate serde_json;
-//! #[macro_use] // required for impl_serde_for_enum_primitive
-//! extern crate serde_shims;
 //!
 //! #[macro_use]
 //! extern crate enum_primitive;
+//! #[macro_use] // required for impl_serde_for_enum_primitive
+//! extern crate enum_primitive_serde_shim;
 //!
 //! enum_from_primitive! {
 //!     #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
@@ -40,6 +41,12 @@
 //!     assert!(serde_json::from_str::<Codes>("16").is_err());
 //! }
 //! ```
+
+#[doc(hidden)]
+pub extern crate serde;
+
+#[doc(hidden)]
+pub extern crate enum_primitive;
 
 /// Implements `Serialize` and `Deserialize` for an `enum_from_primitive!` generated enum.
 ///
@@ -74,7 +81,7 @@ macro_rules! impl_serde_for_enum_primitive {
                     where
                         E: $crate::serde::de::Error,
                     {
-                        $crate::enum_primitive_internal::FromPrimitive::from_u64(value)
+                        $crate::enum_primitive::FromPrimitive::from_u64(value)
                             .ok_or_else(|| E::custom(format!("Invalid Value {} for enum {}", value, stringify!($name))))
                     }
                 }

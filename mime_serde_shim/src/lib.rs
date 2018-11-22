@@ -3,7 +3,8 @@
 //! To enable the Mime shim, add it to the crate features list:
 //!
 //! ```toml
-//! serde_shims = { version = "*", features = ["mime"] }
+//! [dependencies]
+//! mime_serde_shim = "0.1"
 //! ```
 //!
 //! Full example:
@@ -12,7 +13,7 @@
 //! #[macro_use]
 //! extern crate serde_derive;
 //! extern crate serde_json;
-//! extern crate serde_shims;
+//! extern crate mime_serde_shim;
 //!
 //! extern crate mime;
 //!
@@ -20,8 +21,7 @@
 //!
 //! #[derive(Debug, PartialEq, Serialize, Deserialize)]
 //! struct MimeTest {
-//!     #[serde(serialize_with = "serde_shims::mime::serialize")]
-//!     #[serde(deserialize_with = "serde_shims::mime::deserialize")]
+//!     #[serde(with = "mime_serde_shim")]
 //!     mime: mime::Mime,
 //! }
 //!
@@ -41,6 +41,7 @@
 //! ```
 
 extern crate mime;
+extern crate serde;
 
 use std::fmt;
 use std::str::FromStr;
@@ -48,7 +49,7 @@ use std::str::FromStr;
 use serde::de::{self, Deserializer};
 use serde::ser::Serializer;
 
-use self::mime::Mime;
+use mime::Mime;
 
 pub fn serialize<S>(mime: &Mime, serializer: S) -> Result<S::Ok, S::Error>
 where

@@ -3,8 +3,11 @@
 //! To enable `std` shims, add it to the crate features list:
 //!
 //! ```toml
-//! serde_shims = { version = "*", features = ["std"] }
+//! [dependencies]
+//! std_serde_shims = "0.1"
 //! ```
+
+extern crate serde;
 
 use serde::ser::{Serialize, Serializer};
 
@@ -22,12 +25,12 @@ pub mod option {
     /// #[macro_use]
     /// extern crate serde_derive;
     /// extern crate serde_json;
-    /// extern crate serde_shims;
+    /// extern crate std_serde_shims;
     ///
     /// #[derive(Debug, PartialEq, Serialize, Deserialize)]
     /// struct Test {
     ///     /// Many web APIs consider zero to be no limit, but we want our API to use `Option` instead
-    ///     #[serde(serialize_with = "serde_shims::std_shims::option::serialize_none_as_default")]
+    ///     #[serde(serialize_with = "std_serde_shims::option::serialize_none_as_default")]
     ///     item_limit: Option<u64>,
     /// }
     ///

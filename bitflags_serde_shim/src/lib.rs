@@ -3,7 +3,8 @@
 //! To enable to `bitflags` shims, add it to the crate features list:
 //!
 //! ```toml
-//! serde_shims = { version = "*", features = ["bitflags"] }
+//! [dependencies]
+//! bitflags_serde_shim = "0.1"
 //! ```
 //!
 //! Full example:
@@ -12,17 +13,17 @@
 //! #[macro_use]
 //! extern crate serde_derive;
 //! extern crate serde_json;
-//! #[macro_use] // required for impl_serde_for_bitflags
-//! extern crate serde_shims;
 //!
 //! #[macro_use]
 //! extern crate bitflags;
+//! #[macro_use] // required for impl_serde_for_bitflags
+//! extern crate bitflags_serde_shim;
 //!
 //! bitflags! {
 //!     // Note that `impl_serde_for_bitflags` requires the flag type to
 //!     // implement `Serialize` and `Deserialize`.
 //!     //
-//!     // All primitive integer types satisfy these requirements
+//!     // All primitive integer types satisfy this requirement.
 //!     pub struct Permission: u32 {
 //!         const SEND_MESSAGE = 0x00000001;
 //!         const EDIT_MESSAGE = 0x00000002;
@@ -43,6 +44,9 @@
 //!     assert!(serde_json::from_str::<Permission>("51").is_err());
 //! }
 //! ```
+
+#[doc(hidden)]
+pub extern crate serde;
 
 /// Implements `Serialize` and `Deserialize` for a `bitflags!` generated structure.
 ///
