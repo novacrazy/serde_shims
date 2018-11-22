@@ -12,10 +12,10 @@ keywords = ["serde", "shim"]
 publish = false
 
 [dependencies]
-bitflags_serde_shim = { version = "0.2", optional = true, path = "../bitflags_serde_shim" }
-mime_serde_shim = { version = "0.2", optional = true, path = "../mime_serde_shim" }
-std_serde_shims = { version = "0.2", optional = true, path = "../std_serde_shims" }
-enum_primitive_serde_shim = { version = "0.2", optional = true, path = "../enum_primitive_serde_shim" }
+bitflags_serde_shim = { version = "0.2", optional = true, path = "../bitflags" }
+mime_serde_shim = { version = "0.2", optional = true, path = "../mime" }
+std_serde_shims = { version = "0.2", optional = true, path = "../std" }
+enum_primitive_serde_shim = { version = "0.2", optional = true, path = "../enum_primitive" }
 
 [features]
 bitflags = ["bitflags_serde_shim"]

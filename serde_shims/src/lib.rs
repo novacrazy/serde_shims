@@ -1,4 +1,4 @@
-//! Meta package for all Serde shims, mostly for documentation but does
+//! Meta package for all Serde shims, mostly for documentation but does re-export shims like version `0.1`.
 
 /// `bitflags` crate Serde shims
 #[cfg(feature = "bitflags")]

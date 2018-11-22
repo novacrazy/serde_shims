@@ -1,8 +1,8 @@
 [workspace]
 members = [
     "serde_shims",
-    "bitflags_serde_shim",
-    "enum_primitive_serde_shim",
-    "mime_serde_shim",
-    "std_serde_shims",
+    "bitflags",
+    "enum_primitive",
+    "mime",
+    "std",
 ]
