@@ -1,6 +1,6 @@
 [package]
 name = "mime_serde_shim"
-version = "0.2.1"
+version = "0.2.2"
 authors = ["novacrazy <novacrazy@gmail.com>"]
 license = "MIT"
 description = "Community Driven Serde Shims"
