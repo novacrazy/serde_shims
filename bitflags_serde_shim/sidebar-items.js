@@ -1,0 +1,1 @@
+initSidebarItems({"macro":[["impl_serde_for_bitflags","Implements `Serialize` and `Deserialize` for a `bitflags!` generated structure."]]});
