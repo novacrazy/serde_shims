@@ -1,6 +1,6 @@
 [package]
 name = "bitflags_serde_shim"
-version = "0.2.1"
+version = "0.2.2"
 authors = ["novacrazy <novacrazy@gmail.com>"]
 license = "MIT"
 description = "Community Driven Serde Shims"
@@ -13,8 +13,12 @@ readme = "../README.md"
 [badges]
 travis-ci = { repository = "novacrazy/serde_shims" }
 
+[features]
+default = ["std"]
+std = []
+
 [dependencies]
-serde = "1.0"
+serde = { version = "1.0", default_features = false }
 bitflags = "1.0"
 
 [dev-dependencies]

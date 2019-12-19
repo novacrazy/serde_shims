@@ -44,9 +44,18 @@
 //!     assert!(serde_json::from_str::<Permission>("51").is_err());
 //! }
 //! ```
+#![cfg_attr(not(feature = "std"), no_std)]
 
 #[doc(hidden)]
 pub extern crate serde;
+
+#[doc(hidden)]
+#[cfg(not(feature = "std"))]
+pub use core::result::Result;
+
+#[doc(hidden)]
+#[cfg(feature = "std")]
+pub use std::result::Result;
 
 /// Implements `Serialize` and `Deserialize` for a `bitflags!` generated structure.
 ///
@@ -60,7 +69,7 @@ pub extern crate serde;
 macro_rules! impl_serde_for_bitflags {
     ($name:ident) => {
         impl $crate::serde::Serialize for $name {
-            fn serialize<S>(&self, serializer: S) -> ::std::result::Result<S::Ok, S::Error>
+            fn serialize<S>(&self, serializer: S) -> $crate::Result<S::Ok, S::Error>
             where
                 S: $crate::serde::Serializer,
             {
@@ -68,8 +77,9 @@ macro_rules! impl_serde_for_bitflags {
             }
         }
 
+        #[cfg(feature = "std")]
         impl<'de> $crate::serde::Deserialize<'de> for $name {
-            fn deserialize<D>(deserializer: D) -> ::std::result::Result<$name, D::Error>
+            fn deserialize<D>(deserializer: D) -> $crate::Result<$name, D::Error>
             where
                 D: $crate::serde::Deserializer<'de>,
             {
@@ -77,6 +87,20 @@ macro_rules! impl_serde_for_bitflags {
 
                 $name::from_bits(value)
                     .ok_or_else(|| $crate::serde::de::Error::custom(format!("Invalid bits {:#X} for {}", value, stringify!($name))))
+            }
+        }
+
+        #[cfg(not(feature = "std"))]
+        impl<'de> $crate::serde::Deserialize<'de> for $name {
+            fn deserialize<D>(deserializer: D) -> $crate::Result<$name, D::Error>
+            where
+                D: $crate::serde::Deserializer<'de>,
+            {
+                let value = <_ as $crate::serde::Deserialize<'de>>::deserialize(deserializer)?;
+
+                // Use a 'static str for the no_std version
+                $name::from_bits(value)
+                    .ok_or_else(|| $crate::serde::de::Error::custom(stringify!(Invalid bits for $name)))
             }
         }
     };

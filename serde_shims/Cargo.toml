@@ -1,6 +1,6 @@
 [package]
 name = "serde_shims"
-version = "0.2.1"
+version = "0.2.2"
 authors = ["novacrazy <novacrazy@gmail.com>"]
 license = "MIT"
 description = "Community Driven Serde Shims"
@@ -22,11 +22,12 @@ std_serde_shims = { version = "0.2", optional = true } # , path = "../std" }
 enum_primitive_serde_shim = { version = "0.2", optional = true } # , path = "../enum_primitive" }
 
 [features]
+default = ["std"]
+std = ["std_serde_shims", "bitflags_serde_shim/std", "enum_primitive_serde_shim/std"]
 bitflags = ["bitflags_serde_shim"]
 mime = ["mime_serde_shim"]
-std = ["std_serde_shims"]
 enum_primitive = ["enum_primitive_serde_shim"]
-default = []
+
 
 [package.metadata.docs.rs]
 all-features = true
