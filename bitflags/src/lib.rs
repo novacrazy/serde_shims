@@ -86,7 +86,7 @@ macro_rules! impl_serde_for_bitflags {
                 let value = <_ as $crate::serde::Deserialize<'de>>::deserialize(deserializer)?;
 
                 $name::from_bits(value)
-                    .ok_or_else(|| $crate::serde::de::Error::custom(format!("Invalid bits {:#X} for {}", value, stringify!($name))))
+                    .ok_or_else(|| $crate::serde::de::Error::custom(format!(concat!("Invalid bits {:#X} for ", stringify!($name)), value)))
             }
         }
 
@@ -104,4 +104,16 @@ macro_rules! impl_serde_for_bitflags {
             }
         }
     };
+}
+
+pub mod test {
+    use super::*;
+
+    bitflags::bitflags! {
+        pub struct Test: u32 {
+            const TEST = 1;
+        }
+    }
+
+    impl_serde_for_bitflags!(Test);
 }

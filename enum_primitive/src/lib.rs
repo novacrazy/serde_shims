@@ -92,7 +92,7 @@ macro_rules! impl_serde_for_enum_primitive {
                         E: $crate::serde::de::Error,
                     {
                         $crate::enum_primitive::FromPrimitive::from_u64(value)
-                            .ok_or_else(|| E::custom(format!("Invalid primitive value {} for enum {}", value, stringify!($name))))
+                            .ok_or_else(|| E::custom(format!(concat!("Invalid primitive value {} for enum ", stringify!($name)), value)))
                     }
 
                     #[cfg(not(feature = "std"))]
