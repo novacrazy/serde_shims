@@ -105,15 +105,3 @@ macro_rules! impl_serde_for_bitflags {
         }
     };
 }
-
-pub mod test {
-    use super::*;
-
-    bitflags::bitflags! {
-        pub struct Test: u32 {
-            const TEST = 1;
-        }
-    }
-
-    impl_serde_for_bitflags!(Test);
-}
