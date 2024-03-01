@@ -49,13 +49,43 @@
 #[doc(hidden)]
 pub extern crate serde;
 
-#[doc(hidden)]
+/// Implements `Serialize` and `Deserialize` for a `bitflags!` generated structure.
+///
+/// Note that `impl_serde_for_bitflags` requires the flag type to
+/// implement `Serialize` and `Deserialize`.
+///
+/// All primitive integer types satisfy these requirements.
+///
+/// See the [`bitflags`](../bitflags_serde_shim/index.html) shim for a full example.
 #[cfg(not(feature = "std"))]
-pub use core::result::Result;
+#[macro_export]
+macro_rules! impl_serde_for_bitflags {
+    ($name:ident) => {
+        impl $crate::serde::Serialize for $name {
+            #[inline]
+            fn serialize<S>(&self, serializer: S) -> core::result::Result<S::Ok, S::Error>
+            where
+                S: $crate::serde::Serializer,
+            {
+                self.bits().serialize(serializer)
+            }
+        }
 
-#[doc(hidden)]
-#[cfg(feature = "std")]
-pub use std::result::Result;
+        impl<'de> $crate::serde::Deserialize<'de> for $name {
+            #[inline]
+            fn deserialize<D>(deserializer: D) -> core::result::Result<$name, D::Error>
+            where
+                D: $crate::serde::Deserializer<'de>,
+            {
+                let value = <_ as $crate::serde::Deserialize<'de>>::deserialize(deserializer)?;
+
+                // Use a 'static str for the no_std version
+                $name::from_bits(value)
+                    .ok_or_else(|| $crate::serde::de::Error::custom(stringify!(Invalid bits for $name)))
+            }
+        }
+    };
+}
 
 /// Implements `Serialize` and `Deserialize` for a `bitflags!` generated structure.
 ///
@@ -65,11 +95,13 @@ pub use std::result::Result;
 /// All primitive integer types satisfy these requirements.
 ///
 /// See the [`bitflags`](../bitflags_serde_shim/index.html) shim for a full example.
+#[cfg(feature = "std")]
 #[macro_export]
 macro_rules! impl_serde_for_bitflags {
     ($name:ident) => {
         impl $crate::serde::Serialize for $name {
-            fn serialize<S>(&self, serializer: S) -> $crate::Result<S::Ok, S::Error>
+            #[inline]
+            fn serialize<S>(&self, serializer: S) -> core::result::Result<S::Ok, S::Error>
             where
                 S: $crate::serde::Serializer,
             {
@@ -77,9 +109,9 @@ macro_rules! impl_serde_for_bitflags {
             }
         }
 
-        #[cfg(feature = "std")]
         impl<'de> $crate::serde::Deserialize<'de> for $name {
-            fn deserialize<D>(deserializer: D) -> $crate::Result<$name, D::Error>
+            #[inline]
+            fn deserialize<D>(deserializer: D) -> core::result::Result<$name, D::Error>
             where
                 D: $crate::serde::Deserializer<'de>,
             {
@@ -87,20 +119,6 @@ macro_rules! impl_serde_for_bitflags {
 
                 $name::from_bits(value)
                     .ok_or_else(|| $crate::serde::de::Error::custom(format!(concat!("Invalid bits {:#X} for ", stringify!($name)), value)))
-            }
-        }
-
-        #[cfg(not(feature = "std"))]
-        impl<'de> $crate::serde::Deserialize<'de> for $name {
-            fn deserialize<D>(deserializer: D) -> $crate::Result<$name, D::Error>
-            where
-                D: $crate::serde::Deserializer<'de>,
-            {
-                let value = <_ as $crate::serde::Deserialize<'de>>::deserialize(deserializer)?;
-
-                // Use a 'static str for the no_std version
-                $name::from_bits(value)
-                    .ok_or_else(|| $crate::serde::de::Error::custom(stringify!(Invalid bits for $name)))
             }
         }
     };
